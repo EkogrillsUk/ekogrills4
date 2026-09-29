@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eko Grills | Authentic Nigerian Flame-Grilled Delicacies & Suya</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            red: '#8a1723',
+                            darkred: '#5c0c15',
+                            gold: '#df9f35',
+                            dark: '#0f0c0c',
+                            card: '#181213',
+                            accent: '#d9381e'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Cinzel', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0c090a;
+            color: #f3f4f6;
+        }
+        .heading-font {
+            font-family: 'Cinzel', serif;
+        }
+        .flame-gradient {
+            background: linear-gradient(135deg, #8a1723 0%, #d9381e 50%, #df9f35 100%);
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fce088 0%, #df9f35 50%, #e5a93c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #181213;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #8a1723;
+            border-radius: 4px;
+        }
+        .glow-effect {
+            box-shadow: 0 0 25px rgba(217, 56, 30, 0.25);
+        }
+        .glow-gold {
+            box-shadow: 0 0 20px rgba(223, 159, 53, 0.25);
+        }
+    </style>
+</head>
+<body class="bg-[#0c090a] text-gray-100 flex flex-col min-h-screen custom-scrollbar selection:bg-red-800 selection:text-white">
+
+    <!-- IMAGE CONSTANTS IN JS LOGIC BELOW -->
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-40 bg-[#0c090a]/95 backdrop-blur-md border-b border-red-900/30 transition-all duration-300 shadow-xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative overflow-hidden rounded-full p-1 bg-gradient-to-r from-red-900 via-red-600 to-amber-500 transition duration-300 group-hover:scale-105">
+                        <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Eko Grills Logo" class="h-12 w-12 rounded-full object-cover bg-white">
+                    </div>
+                    <div>
+                        <span class="heading-font text-2xl font-black tracking-wider text-white block leading-tight">EKO <span class="text-amber-500">GRILLS</span></span>
+                        <span class="text-[10px] tracking-widest text-amber-400 uppercase font-semibold block">Authentic Flame Grill</span>
+                    </div>
+                </a>
+
+                <!-- Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+                    <a href="#menu" class="text-gray-300 hover:text-amber-400 transition">Menu</a>
+                    <a href="#builder" class="text-gray-300 hover:text-amber-400 transition flex items-center gap-1.5">
+                        <i class="fa-solid font-bold fa-fire-burner text-red-500"></i>
+                        <span>Custom Platter Builder</span>
+                    </a>
+                    <a href="#about" class="text-gray-300 hover:text-amber-400 transition">Our Craft</a>
+                    <a href="#contact" class="text-gray-300 hover:text-amber-400 transition">Order via WhatsApp</a>
+                </nav>
+
+                <!-- Actions / Cart Button -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCart()" class="relative bg-gradient-to-r from-red-800 to-red-900 hover:from-red-700 hover:to-red-800 text-white px-4 py-2.5 rounded-xl flex items-center gap-2.5 font-semibold text-sm transition shadow-lg border border-red-700/50">
+                        <i class="fa-solid fa-fire-flame-curved text-amber-400"></i>
+                        <span>Your Order</span>
+                        <span id="cart-count-badge" class="bg-amber-500 text-black text-xs font-bold px-2 py-0.5 rounded-full min-w-[20px] text-center">0</span>
+                    </button>
+                    
+                    <button onclick="toggleMobileMenu()" class="md:hidden text-gray-300 hover:text-white p-2">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#120e0f] border-b border-red-900/40 px-4 pt-2 pb-6 space-y-3 text-center">
+            <a href="#menu" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 font-medium hover:text-amber-400">Menu</a>
+            <a href="#builder" onclick="toggleMobileMenu()" class="block py-2 text-amber-400 font-bold">Build Your Custom Platter</a>
+            <a href="#about" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 font-medium hover:text-amber-400">Our Craft</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="block py-2 text-gray-200 font-medium hover:text-amber-400">Scan & Connect</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden py-16 md:py-24 bg-gradient-to-b from-[#140e0f] via-[#0c090a] to-[#0c090a] border-b border-red-900/20">
+        <div class="absolute inset-0 opacity-20 bg-[radial-gradient(#8a1723_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-red-950/80 border border-red-800/60 text-amber-400 text-xs font-bold tracking-wider uppercase">
+                        <i class="fa-solid fa-fire text-red-500 animate-pulse"></i> Genuine Lagos Street Suya & Flame Grills
+                    </div>
+                    <h1 class="heading-font text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight">
+                        Authentic <span class="gold-gradient-text">Beef Suya</span> & Sizzling Nigerian Barbecue
+                    </h1>
+                    <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                        Handcrafted with traditional Yaji spice blends, slow-marinated prime cuts, and roasted over open flames to deliver that unmistakable Eko signature smokiness.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#builder" class="bg-gradient-to-r from-red-700 via-red-800 to-amber-600 hover:from-red-600 hover:to-amber-500 text-white font-bold px-8 py-4 rounded-xl shadow-lg transition transform hover:-translate-y-0.5 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            <span>Build Custom Platter</span>
+                        </a>
+                        <a href="#menu" class="bg-zinc-900 hover:bg-zinc-800 text-gray-200 border border-zinc-700 font-bold px-8 py-4 rounded-xl transition flex items-center justify-center gap-2">
+                            <span>View Full Menu</span>
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Hero Image Card featuring Logo & Suya Highlight -->
+                <div class="lg:col-span-5 relative flex justify-center">
+                    <div class="relative w-full max-w-md bg-gradient-to-b from-zinc-900 to-[#181213] p-6 rounded-3xl border border-red-900/40 glow-effect text-center space-y-6">
+                        <div class="relative mx-auto w-40 h-40 rounded-full p-1.5 bg-gradient-to-tr from-amber-500 via-red-600 to-red-900 shadow-2xl">
+                            <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Eko Grills Official Logo" class="w-full h-full object-cover rounded-full bg-white">
+                        </div>
+                        <div>
+                            <span class="text-xs uppercase tracking-widest text-amber-500 font-bold">Featured Signature Specialty</span>
+                            <h3 class="heading-font text-2xl font-bold text-white mt-1">Eko Premium Beef Suya Box</h3>
+                            <p class="text-sm text-gray-400 mt-2">Generous portion of fiery spiced beef strips, sliced onions, fresh tomatoes & extra Yaji pepper mix.</p>
+                        </div>
+                        <div class="bg-red-950/50 border border-red-800/40 rounded-2xl p-4 flex items-center justify-between">
+                            <div class="text-left">
+                                <span class="text-xs text-gray-400 block">Full Portion Box</span>
+                                <span class="text-2xl font-black text-amber-400">£36.00</span>
+                            </div>
+                            <button onclick="addSingleItem('suya-box-main')" class="bg-amber-500 hover:bg-amber-400 text-black font-extrabold px-5 py-2.5 rounded-xl text-sm transition flex items-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Add to Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Platter Builder Section -->
+    <section id="builder" class="py-16 bg-[#110d0e] border-b border-red-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-sliders"></i> Interactive Experience
+                </div>
+                <h2 class="heading-font text-3xl sm:text-4xl font-extrabold text-white">Create Your Eko Custom Platter</h2>
+                <p class="text-gray-400 mt-3 text-sm sm:text-base">Mix and match your favorite flame-grilled meats, sides, and authentic Yaji heat level to construct your perfect feast.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+                <!-- Builder Controls -->
+                <div class="lg:col-span-7 space-y-8">
+                    <!-- Step 1: Proteins Selection -->
+                    <div class="bg-[#181213] rounded-2xl p-6 border border-zinc-800 shadow-md">
+                        <div class="flex items-center justify-between mb-4 border-b border-zinc-800 pb-3">
+                            <h3 class="heading-font text-lg font-bold text-white flex items-center gap-2">
+                                <span class="w-7 h-7 rounded-full bg-red-800 text-amber-400 flex items-center justify-center text-xs">1</span>
+                                Select Flame-Grilled Meats
+                            </h3>
+                            <span class="text-xs text-amber-400 font-medium">Custom Quantities</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                            <!-- Beef Suya Item -->
+                            <div class="flex items-center justify-between p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800/80 hover:border-red-900/50 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-red-950 flex items-center justify-center text-amber-500 font-bold">
+                                        <i class="fa-solid fa-drumstick-bite"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-white text-sm">Beef Suya Portion <span class="text-xs text-amber-500 bg-amber-500/10 px-2 py-0.5 rounded ml-1 font-normal">Signature</span></div>
+                                        <div class="text-xs text-gray-400">Authentic spicy thin sliced beef (£36.00 / portion)</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-black text-amber-400 text-sm">£36.00</span>
+                                    <div class="flex items-center bg-zinc-800 rounded-lg p-1 border border-zinc-700">
+                                        <button onclick="updateBuilderQty('beefSuya', -1)" class="w-7 h-7 text-gray-300 hover:text-white rounded hover:bg-zinc-700 font-bold">-</button>
+                                        <span id="builder-qty-beefSuya" class="w-8 text-center text-sm font-bold text-white">0</span>
+                                        <button onclick="updateBuilderQty('beefSuya', 1)" class="w-7 h-7 text-gray-300 hover:text-white rounded hover:bg-zinc-700 font-bold">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Grilled Chicken Wings -->
+                            <div class="flex items-center justify-between p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800/80 hover:border-red-900/50 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-red-950 flex items-center justify-center text-amber-500 font-bold">
+                                        <i class="fa-solid fa-feather"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-white text-sm">Smoky Chicken Wings</div>
+                                        <div class="text-xs text-gray-400">Flame-grilled seasoned wing portion (£14.00)</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-black text-amber-400 text-sm">£14.00</span>
+                                    <div class="flex items-center bg-zinc-800 rounded-lg p-1 border border-zinc-700">
+                                        <button onclick="updateBuilderQty('wings', -1)" class="w-7 h-7 text-gray-300 hover:text-white rounded hover:bg-zinc-700 font-bold">-</button>
+                                        <span id="builder-qty-wings" class="w-8 text-center text-sm font-bold text-white">0</span>
+                                        <button onclick="updateBuilderQty('wings', 1)" class="w-7 h-7 text-gray-300 hover:text-white rounded hover:bg-zinc-700 font-bold">+</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Grilled Asun / Goat Meat -->
+                            <div class="flex items-center justify-between p-3.5 rounded-xl bg-zinc-900/80 border border-zinc-800/80 hover:border-red-900/50 transition">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-lg bg-red-950 flex items-center justify-center text-amber-500 font-bold">
+                                        <i class="fa-solid fa-fire"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-white text-sm">Spicy Peppered Asun (Goat)</div>
+                                        <div class="text-xs text-gray-400">Char-grilled goat meat bites (£18.00)</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="font-black text-amber-400 text-sm">£18.00</span>
+                                    <div class="flex items-center bg-zinc-800 rounded-lg p-1 border border-zinc-700">
+                                        <button onclick="updateBuilderQty('asun', -1)" class="w-7 h-7 text-gray-300 hover:text-white rounded hover:bg-zinc-700 font-bold">-</button>
+                                        <span id="builder-qty-asun" class="w-8 text-center text-sm font-bold text-white">0</span>
+                                        <button onclick="updateBuilderQty('asun', 1)" class="w-7 h-7 text-gray-300 hover:text-white rounded hover:bg-zinc-700 font-bold">+</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Sides Selection -->
+                    <div class="bg-[#181213] rounded-2xl p-6 border border-zinc-800 shadow-md">
+                        <div class="flex items-center justify-between mb-4 border-b border-zinc-800 pb-3">
+                            <h3 class="heading-font text-lg font-bold text-white flex items-center gap-2">
+                                <span class="w-7 h-7 rounded-full bg-red-800 text-amber-400 flex items-center justify-center text-xs">2</span>
+                                Complementary Sides
+                            </h3>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center justify-between p-3 rounded-xl bg-zinc-900 cursor-pointer border border-zinc-800 hover:border-amber-500/50 transition">
+                                <div class="flex items-center gap-2.5">
+                                    <input type="checkbox" id="side-jollof" onchange="updateBuilderCalculations()" class="accent-amber-500 w-4 h-4">
+                                    <span class="text-sm font-medium text-white">Smoky Jollof Rice</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold">+£5.00</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl bg-zinc-900 cursor-pointer border border-zinc-800 hover:border-amber-500/50 transition">
+                                <div class="flex items-center gap-2.5">
+                                    <input type="checkbox" id="side-plantain" onchange="updateBuilderCalculations()" class="accent-amber-500 w-4 h-4">
+                                    <span class="text-sm font-medium text-white">Fried Sweet Plantain</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold">+£4.00</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl bg-zinc-900 cursor-pointer border border-zinc-800 hover:border-amber-500/50 transition">
+                                <div class="flex items-center gap-2.5">
+                                    <input type="checkbox" id="side-yam" onchange="updateBuilderCalculations()" class="accent-amber-500 w-4 h-4">
+                                    <span class="text-sm font-medium text-white">Fried Yam Chips</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold">+£5.00</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3 rounded-xl bg-zinc-900 cursor-pointer border border-zinc-800 hover:border-amber-500/50 transition">
+                                <div class="flex items-center gap-2.5">
+                                    <input type="checkbox" id="side-slaw" onchange="updateBuilderCalculations()" class="accent-amber-500 w-4 h-4">
+                                    <span class="text-sm font-medium text-white">Eko Spicy Coleslaw</span>
+                                </div>
+                                <span class="text-xs text-amber-400 font-bold">+£3.00</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Heat Level -->
+                    <div class="bg-[#181213] rounded-2xl p-6 border border-zinc-800 shadow-md">
+                        <h3 class="heading-font text-lg font-bold text-white flex items-center gap-2 mb-4 border-b border-zinc-800 pb-3">
+                            <span class="w-7 h-7 rounded-full bg-red-800 text-amber-400 flex items-center justify-center text-xs">3</span>
+                            Select Yaji Spice Heat Level
+                        </h3>
+                        <div class="grid grid-cols-3 gap-3">
+                            <button type="button" onclick="setHeatLevel('Mild')" id="heat-Mild" class="heat-btn p-3 rounded-xl bg-zinc-900 border border-zinc-700 text-center text-xs font-bold text-gray-300 hover:border-amber-500 transition">
+                                <i class="fa-solid fa-pepper-hot text-amber-500 mb-1 block text-base"></i> Mild Yaji
+                            </button>
+                            <button type="button" onclick="setHeatLevel('Medium Hot')" id="heat-Medium Hot" class="heat-btn p-3 rounded-xl bg-red-950 border-2 border-red-600 text-center text-xs font-bold text-amber-400 transition">
+                                <i class="fa-solid fa-pepper-hot text-red-500 mb-1 block text-base"></i> Medium Spice
+                            </button>
+                            <button type="button" onclick="setHeatLevel('Fiery Eko Hot')" id="heat-Fiery Eko Hot" class="heat-btn p-3 rounded-xl bg-zinc-900 border border-zinc-700 text-center text-xs font-bold text-gray-300 hover:border-red-500 transition">
+                                <i class="fa-solid fa-fire text-red-500 mb-1 block text-base"></i> Fiery Eko Hot
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Platter Live Summary Sticky Card -->
+                <div class="lg:col-span-5 lg:sticky lg:top-28">
+                    <div class="bg-gradient-to-b from-[#1c1517] to-[#140e0f] rounded-3xl p-6 border border-red-900/50 shadow-2xl relative overflow-hidden">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Eko Logo" class="w-10 h-10 rounded-full border border-amber-500 object-cover bg-white">
+                            <div>
+                                <h3 class="heading-font text-lg font-bold text-white">Custom Platter Summary</h3>
+                                <p class="text-xs text-amber-400">Tailored to your exact craving</p>
+                            </div>
+                        </div>
+
+                        <div id="platter-summary-list" class="space-y-2 py-4 border-t border-b border-zinc-800 text-sm text-gray-300 min-h-[140px]">
+                            <p class="text-xs text-gray-500 italic text-center py-6">Select meats or sides above to start building your custom box.</p>
+                        </div>
+
+                        <div class="mt-4 pt-2 space-y-3">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xs text-gray-400">Spice Level:</span>
+                                <span id="summary-spice" class="text-xs font-bold text-amber-400 bg-red-950 px-2.5 py-1 rounded-full border border-red-800">Medium Spice</span>
+                            </div>
+                            <div class="flex justify-between items-center text-lg font-black pt-2">
+                                <span class="text-white">Total Platter Price:</span>
+                                <span id="summary-total-price" class="text-amber-400 text-2xl">£0.00</span>
+                            </div>
+
+                            <button onclick="addCustomPlatterToCart()" id="add-platter-btn" disabled class="w-full bg-gradient-to-r from-amber-500 via-amber-600 to-red-700 hover:from-amber-400 hover:to-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-black font-extrabold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-basket-shopping"></i> Add Platter to Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 bg-[#0c090a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+                <div>
+                    <div class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-1">Fresh Off The Grill</div>
+                    <h2 class="heading-font text-3xl sm:text-4xl font-black text-white">Eko Grills Menu Selection</h2>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2" id="menu-filters">
+                    <button onclick="filterMenu('all')" class="filter-btn active-filter px-4 py-2 rounded-xl text-xs font-bold bg-amber-500 text-black transition">All Items</button>
+                    <button onclick="filterMenu('suya')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 text-gray-300 hover:bg-zinc-800 transition">Suya & Skewers</button>
+                    <button onclick="filterMenu('grills')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 text-gray-300 hover:bg-zinc-800 transition">Flame Grills</button>
+                    <button onclick="filterMenu('sides')" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold bg-zinc-900 text-gray-300 hover:bg-zinc-800 transition">Sides & Drinks</button>
+                </div>
+            </div>
+
+            <!-- Menu Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="menu-grid">
+                <!-- Dynamically populated via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Brand Craft / About Section -->
+    <section id="about" class="py-16 bg-[#120e0f] border-t border-b border-red-900/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-5">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950 text-amber-400 text-xs font-bold uppercase tracking-wider">
+                        <i class="fa-solid fa-crown text-amber-500"></i> Quality First
+                    </div>
+                    <h2 class="heading-font text-3xl sm:text-4xl font-extrabold text-white">Crafted With Fire, Passion & Authentic Yaji</h2>
+                    <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                        At Eko Grills, every piece of meat is selected for prime quality, marinated in our secret house blend of Kuli-Kuli groundnut spices, ginger, and garlic, then grilled over open embers to achieve the perfect balance of heat, smoke, and tenderness.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 pt-2">
+                        <div class="bg-zinc-900/80 p-4 rounded-xl border border-zinc-800">
+                            <div class="text-amber-400 font-black text-2xl heading-font">100%</div>
+                            <div class="text-xs text-gray-400 font-medium">Halal Prime Cuts</div>
+                        </div>
+                        <div class="bg-zinc-900/80 p-4 rounded-xl border border-zinc-800">
+                            <div class="text-amber-400 font-black text-2xl heading-font">Fresh</div>
+                            <div class="text-xs text-gray-400 font-medium">Daily Yaji Preparation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative flex justify-center">
+                    <div class="bg-gradient-to-tr from-red-950 via-zinc-900 to-[#181213] p-8 rounded-3xl border border-amber-500/30 text-center space-y-6 glow-gold max-w-md w-full">
+                        <div class="w-32 h-32 mx-auto rounded-full p-1 bg-gradient-to-r from-amber-500 to-red-600 shadow-xl">
+                            <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Eko Grills Seal" class="w-full h-full object-cover rounded-full bg-white">
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-white">Eko Grills Guarantee</h3>
+                        <p class="text-xs text-gray-300 leading-relaxed">
+                            "Every order is freshly prepared on fire. We never compromise on spice level, meat tenderness, or authentic Nigerian flavor."
+                        </p>
+                        <div class="text-xs text-amber-400 font-bold uppercase tracking-widest">— The Eko Grills Grillmasters</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Scan & Socials Section -->
+    <section id="contact" class="py-16 bg-[#0c090a]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-gradient-to-r from-red-950 via-zinc-900 to-zinc-900 rounded-3xl border border-red-800/40 p-8 sm:p-12 shadow-2xl relative overflow-hidden">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 space-y-5 text-center lg:text-left">
+                        <span class="text-xs font-extrabold text-amber-400 tracking-widest uppercase bg-amber-500/10 px-3 py-1 rounded-full border border-amber-500/20">Instant Orders & Enquiries</span>
+                        <h2 class="heading-font text-3xl sm:text-4xl font-extrabold text-white">Scan To Connect On WhatsApp & Socials</h2>
+                        <p class="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            Need catering for an event, special spice adjustments, or want to place your direct order via WhatsApp? Scan our official QR code with your phone camera or click below.
+                        </p>
+                        <div class="pt-2 flex flex-wrap gap-4 justify-center lg:justify-start">
+                            <a href="https://wa.me/?text=Hello%20Eko%20Grills,%20I%20would%20like%20to%20order%20Beef%20Suya%20and%20grills!" target="_blank" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-6 py-3.5 rounded-xl transition flex items-center gap-2 text-sm shadow-lg">
+                                <i class="fa-brands fa-whatsapp text-lg"></i> Open WhatsApp Chat
+                            </a>
+                            <button onclick="toggleCart()" class="bg-amber-500 hover:bg-amber-400 text-black font-extrabold px-6 py-3.5 rounded-xl transition flex items-center gap-2 text-sm">
+                                <i class="fa-solid fa-cart-shopping"></i> Review Online Cart
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Direct Scan QR Display -->
+                    <div class="lg:col-span-5 flex flex-col items-center justify-center">
+                        <div class="bg-white p-4 rounded-3xl shadow-2xl border-4 border-amber-500 transform hover:scale-105 transition duration-300 text-center max-w-[240px]">
+                            <img src="Socials QR Code.png" alt="Eko Grills WhatsApp and Socials QR Code" class="w-52 h-52 object-contain mx-auto">
+                            <span class="block text-[11px] font-extrabold text-gray-800 mt-2 uppercase tracking-wider">Scan for Socials & Orders</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#080606] text-gray-400 border-t border-zinc-900 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Col 1: Brand info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Eko Grills Logo" class="h-10 w-10 rounded-full object-cover bg-white">
+                        <span class="heading-font text-xl font-extrabold text-white">EKO <span class="text-amber-500">GRILLS</span></span>
+                    </div>
+                    <p class="text-xs text-gray-400 leading-relaxed">The home of premium spicy Suya, flame-grilled chicken, peppered goat meat, and authentic Nigerian street side delicacies.</p>
+                </div>
+
+                <!-- Col 2: Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3 heading-font uppercase tracking-wider">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#menu" class="hover:text-amber-400 transition">Our Menu</a></li>
+                        <li><a href="#builder" class="hover:text-amber-400 transition">Custom Platter Builder</a></li>
+                        <li><a href="#about" class="hover:text-amber-400 transition">The Grillmaster Story</a></li>
+                        <li><a href="#contact" class="hover:text-amber-400 transition">WhatsApp Direct Scan</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Popular Items -->
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-3 heading-font uppercase tracking-wider">Popular Items</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><span class="text-gray-300">Beef Suya Box — <strong class="text-amber-400">£36.00</strong></span></li>
+                        <li><span class="text-gray-300">Eko Mega Grill Box — <strong class="text-amber-400">£55.00</strong></span></li>
+                        <li><span class="text-gray-300">Spicy Asun Portion — <strong class="text-amber-400">£18.00</strong></span></li>
+                        <li><span class="text-gray-300">Smoky Wings Portion — <strong class="text-amber-400">£14.00</strong></span></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: QR Code & Socials -->
+                <div class="flex flex-col items-start">
+                    <h4 class="text-white font-bold text-sm mb-3 heading-font uppercase tracking-wider">Scan & Connect</h4>
+                    <div class="flex items-center gap-3 bg-zinc-900 p-2.5 rounded-xl border border-zinc-800">
+                        <img src="Socials QR Code.png" alt="Eko QR Code" class="w-14 h-14 bg-white rounded-lg p-0.5 object-contain">
+                        <div class="text-[11px]">
+                            <p class="font-bold text-white">WhatsApp & Socials</p>
+                            <p class="text-gray-400">Scan code to chat</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="border-t border-zinc-900 pt-6 flex flex-col sm:flex-row justify-between items-center text-xs text-gray-500 gap-4">
+                <p>&copy; 2026 Eko Grills. All rights reserved.</p>
+                <div class="flex items-center gap-4">
+                    <span>Authentic Nigerian Flame Grill</span>
+                    <span>•</span>
+                    <span class="text-amber-400 font-semibold">Suya Box: £36.00</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Drawer Container -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden transition-all duration-300">
+        <!-- Backdrop -->
+        <div onclick="toggleCart()" class="absolute inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
+        
+        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10">
+            <div class="w-screen max-w-md bg-[#140f10] border-l border-red-900/40 text-gray-100 flex flex-col shadow-2xl">
+                <!-- Cart Header -->
+                <div class="p-6 bg-[#1a1314] border-b border-zinc-800 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Logo" class="w-8 h-8 rounded-full border border-amber-500 bg-white object-cover">
+                        <h2 class="heading-font text-lg font-bold text-white">Your Eko Order</h2>
+                    </div>
+                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-2 text-lg">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+
+                <!-- Cart Items List -->
+                <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                    <!-- Populated via JS -->
+                </div>
+
+                <!-- Cart Footer Summary -->
+                <div class="p-6 bg-[#181213] border-t border-zinc-800 space-y-4">
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between text-gray-400">
+                            <span>Subtotal</span>
+                            <span id="cart-subtotal" class="font-bold text-white">£0.00</span>
+                        </div>
+                        <div class="flex justify-between text-gray-400">
+                            <span>Packaging & Seasoning</span>
+                            <span class="text-amber-400 font-bold">Included</span>
+                        </div>
+                        <div class="flex justify-between text-lg font-black pt-2 border-t border-zinc-800">
+                            <span class="text-white">Total</span>
+                            <span id="cart-total" class="text-amber-400">£0.00</span>
+                        </div>
+                    </div>
+
+                    <button onclick="openCheckoutModal()" id="checkout-btn" disabled class="w-full bg-gradient-to-r from-amber-500 to-red-700 hover:from-amber-400 hover:to-red-600 disabled:opacity-50 disabled:cursor-not-allowed text-black font-extrabold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-bag-shopping"></i> Proceed to Checkout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div id="checkout-modal" class="fixed inset-0 z-50 overflow-y-auto hidden">
+        <div class="min-h-screen px-4 text-center flex items-center justify-center">
+            <div onclick="closeCheckoutModal()" class="fixed inset-0 bg-black/80 backdrop-blur-sm transition-opacity"></div>
+
+            <div class="inline-block w-full max-w-lg p-6 sm:p-8 my-8 text-left align-middle transition-all transform bg-[#181213] border border-red-900/50 shadow-2xl rounded-3xl relative z-10">
+                <button onclick="closeCheckoutModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white text-xl">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="flex items-center gap-3 mb-6 border-b border-zinc-800 pb-4">
+                    <img src="A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg" alt="Logo" class="w-10 h-10 rounded-full border border-amber-500 bg-white object-cover">
+                    <div>
+                        <h3 class="heading-font text-xl font-black text-white">Complete Your Order</h3>
+                        <p class="text-xs text-amber-400">Select delivery or collection details</p>
+                    </div>
+                </div>
+
+                <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Full Name</label>
+                        <input type="text" required placeholder="e.g. Babatunde Adebayo" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Phone Number</label>
+                            <input type="tel" required placeholder="e.g. 07123456789" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Order Method</label>
+                            <select id="order-type" onchange="toggleDeliveryAddress(this.value)" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                                <option value="delivery">Home Delivery</option>
+                                <option value="collection">Self Collection</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="address-field">
+                        <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Delivery Address</label>
+                        <textarea rows="2" placeholder="Street Address, Postcode, Special Delivery Notes" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-300 uppercase mb-1">Spice & Preparation Notes</label>
+                        <input type="text" placeholder="e.g. Extra Yaji pepper on side, extra sliced onions" class="w-full bg-zinc-900 border border-zinc-700 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-amber-500">
+                    </div>
+
+                    <div class="bg-zinc-900/90 rounded-2xl p-4 border border-zinc-800 space-y-2 mt-4">
+                        <div class="flex justify-between text-xs text-gray-400">
+                            <span>Order Total:</span>
+                            <span id="checkout-total-amount" class="text-base font-black text-amber-400">£0.00</span>
+                        </div>
+                        <p class="text-[11px] text-gray-400">Submitting will send your order details directly to our WhatsApp grill desk for instant confirmation & payment link.</p>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 rounded-xl transition shadow-lg flex items-center justify-center gap-2 text-sm mt-4">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Send Order via WhatsApp
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // BRAND ASSET CONSTANTS
+        const OFFICIAL_LOGO = 'A437AA1F-5430-4B4A-9DBB-D229E93F7538_L0_001-27_09_2025, 08_32_19 (1).jpg';
+        const SOCIALS_QR = 'Socials QR Code.png';
+
+        // MENU DATABASE (Updated Beef Suya portion to £36.00)
+        const MENU_DATA = [
+            {
+                id: 'suya-box-main',
+                name: 'Eko Beef Suya Box',
+                category: 'suya',
+                price: 36.00, // Corrected price to £36.00
+                description: 'Authentic signature tender beef strips, generously dusted in Yaji spice, flame-grilled with fresh sliced onions & tomatoes.',
+                badge: 'Best Seller',
+                icon: 'fa-drumstick-bite'
+            },
+            {
+                id: 'mega-grill-box',
+                name: 'Eko Mega Feast Box',
+                category: 'grills',
+                price: 55.00,
+                description: 'Full platter: Beef Suya (£36 portion), Smoky Wings, Peppered Goat Asun, Fried Plantain & Jollof Rice.',
+                badge: 'Ultimate Feast',
+                icon: 'fa-fire-burner'
+            },
+            {
+                id: 'asun-portion',
+                name: 'Spicy Peppered Asun',
+                category: 'grills',
+                price: 18.00,
+                description: 'Slow-roasted spicy habanero goat meat stir-fried with bell peppers and traditional seasonings.',
+                badge: 'Hot & Spicy',
+                icon: 'fa-pepper-hot'
+            },
+            {
+                id: 'wings-portion',
+                name: 'Smoky Flame-Grilled Wings',
+                category: 'grills',
+                price: 14.00,
+                description: '8 piece succulent chicken wings marinated in house Yaji glaze and fire-charred.',
+                badge: 'Popular',
+                icon: 'fa-feather'
+            },
+            {
+                id: 'side-jollof-main',
+                name: 'Eko Smoky Jollof Rice',
+                category: 'sides',
+                price: 5.00,
+                description: 'Traditional party-style firewood infused Jollof rice prepared with rich tomato and pepper base.',
+                badge: 'Essential Side',
+                icon: 'fa-bowl-rice'
+            },
+            {
+                id: 'side-plantain-main',
+                name: 'Sweet Fried Dodo (Plantain)',
+                category: 'sides',
+                price: 4.00,
+                description: 'Golden ripe sweet fried plantain slices, crispy on the edges and soft inside.',
+                badge: 'Sweet Side',
+                icon: 'fa-utensils'
+            },
+            {
+                id: 'side-yam-main',
+                name: 'Crispy Fried Yam Chips',
+                category: 'sides',
+                price: 5.00,
+                description: 'Thick cut fried yam chips served with spicy pepper dipping sauce.',
+                badge: 'Crunchy Side',
+                icon: 'fa-cubes'
+            },
+            {
+                id: 'extra-yaji-pack',
+                name: 'Eko Signature Yaji Spice Pack',
+                category: 'sides',
+                price: 3.50,
+                description: '100g sealed tub of our authentic Hausa-style ground nut & ginger pepper Yaji spice.',
+                badge: 'Spice Extra',
+                icon: 'fa-jar'
+            }
+        ];
+
+        // STATE MANAGEMENT
+        let cart = [];
+        let builderState = {
+            beefSuya: 0, // £36.00 per unit
+            wings: 0,    // £14.00 per unit
+            asun: 0,     // £18.00 per unit
+            heatLevel: 'Medium Hot'
+        };
+
+        const PRICES = {
+            beefSuya: 36.00,
+            wings: 14.00,
+            asun: 18.00,
+            jollof: 5.00,
+            plantain: 4.00,
+            yam: 5.00,
+            slaw: 3.00
+        };
+
+        // DOM LOAD INITIALIZATION
+        window.onload = function() {
+            renderMenuGrid('all');
+            updateCartUI();
+            updateBuilderCalculations();
+        };
+
+        // RENDER MENU GRID
+        function renderMenuGrid(category) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+
+            const filtered = category === 'all' 
+                ? MENU_DATA 
+                : MENU_DATA.filter(item => item.category === category);
+
+            filtered.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-[#181213] rounded-2xl p-6 border border-zinc-800 flex flex-col justify-between hover:border-red-800/60 transition group shadow-md';
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-start mb-3">
+                            <span class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-full bg-red-950 text-amber-400 border border-red-800/50">
+                                ${item.badge}
+                            </span>
+                            <div class="w-8 h-8 rounded-full bg-zinc-900 flex items-center justify-center text-amber-500">
+                                <i class="fa-solid ${item.icon}"></i>
+                            </div>
+                        </div>
+                        <h3 class="heading-font text-xl font-bold text-white group-hover:text-amber-400 transition">${item.name}</h3>
+                        <p class="text-gray-400 text-xs mt-2 leading-relaxed">${item.description}</p>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-zinc-800/80 flex items-center justify-between">
+                        <div>
+                            <span class="text-[10px] text-gray-500 block uppercase">Price</span>
+                            <span class="text-2xl font-black text-amber-400">£${item.price.toFixed(2)}</span>
+                        </div>
+                        <button onclick="addSingleItem('${item.id}')" class="bg-gradient-to-r from-red-800 to-amber-600 hover:from-red-700 hover:to-amber-500 text-white font-bold px-4 py-2.5 rounded-xl text-xs transition flex items-center gap-2 shadow">
+                            <i class="fa-solid fa-plus"></i> Add to Order
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // FILTER MENU CATEGORIES
+        function filterMenu(category) {
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-amber-500', 'text-black');
+                btn.classList.add('bg-zinc-900', 'text-gray-300');
+            });
+            event.target.classList.remove('bg-zinc-900', 'text-gray-300');
+            event.target.classList.add('bg-amber-500', 'text-black');
+
+            renderMenuGrid(category);
+        }
+
+        // BUILDER LOGIC
+        function updateBuilderQty(key, delta) {
+            builderState[key] = Math.max(0, builderState[key] + delta);
+            document.getElementById(`builder-qty-${key}`).innerText = builderState[key];
+            updateBuilderCalculations();
+        }
+
+        function setHeatLevel(level) {
+            builderState.heatLevel = level;
+            document.querySelectorAll('.heat-btn').forEach(btn => {
+                btn.classList.remove('bg-red-950', 'border-2', 'border-red-600', 'text-amber-400');
+                btn.classList.add('bg-zinc-900', 'border', 'border-zinc-700', 'text-gray-300');
+            });
+            
+            const activeBtn = document.getElementById(`heat-${level}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-zinc-900', 'border-zinc-700', 'text-gray-300');
+                activeBtn.classList.add('bg-red-950', 'border-2', 'border-red-600', 'text-amber-400');
+            }
+            updateBuilderCalculations();
+        }
+
+        function updateBuilderCalculations() {
+            let total = 0;
+            let summaryItems = [];
+
+            // Meats
+            if (builderState.beefSuya > 0) {
+                const suyaCost = builderState.beefSuya * PRICES.beefSuya; // £36 per portion
+                total += suyaCost;
+                summaryItems.push(`• ${builderState.beefSuya}x Beef Suya Portion (£${suyaCost.toFixed(2)})`);
+            }
+            if (builderState.wings > 0) {
+                const wingsCost = builderState.wings * PRICES.wings;
+                total += wingsCost;
+                summaryItems.push(`• ${builderState.wings}x Smoky Chicken Wings (£${wingsCost.toFixed(2)})`);
+            }
+            if (builderState.asun > 0) {
+                const asunCost = builderState.asun * PRICES.asun;
+                total += asunCost;
+                summaryItems.push(`• ${builderState.asun}x Spicy Goat Asun (£${asunCost.toFixed(2)})`);
+            }
+
+            // Sides
+            const jollof = document.getElementById('side-jollof')?.checked;
+            const plantain = document.getElementById('side-plantain')?.checked;
+            const yam = document.getElementById('side-yam')?.checked;
+            const slaw = document.getElementById('side-slaw')?.checked;
+
+            if (jollof) { total += PRICES.jollof; summaryItems.push(`• Side: Smoky Jollof Rice (£5.00)`); }
+            if (plantain) { total += PRICES.plantain; summaryItems.push(`• Side: Fried Dodo (£4.00)`); }
+            if (yam) { total += PRICES.yam; summaryItems.push(`• Side: Fried Yam Chips (£5.00)`); }
+            if (slaw) { total += PRICES.slaw; summaryItems.push(`• Side: Eko Spicy Coleslaw (£3.00)`); }
+
+            // UI Update
+            const summaryContainer = document.getElementById('platter-summary-list');
+            const totalElement = document.getElementById('summary-total-price');
+            const addBtn = document.getElementById('add-platter-btn');
+            document.getElementById('summary-spice').innerText = builderState.heatLevel;
+
+            if (summaryItems.length === 0) {
+                summaryContainer.innerHTML = `<p class="text-xs text-gray-500 italic text-center py-6">Select meats or sides above to start building your custom box.</p>`;
+                totalElement.innerText = `£0.00`;
+                addBtn.disabled = true;
+            } else {
+                summaryContainer.innerHTML = summaryItems.map(item => `<div class="py-1 border-b border-zinc-800/40">${item}</div>`).join('');
+                totalElement.innerText = `£${total.toFixed(2)}`;
+                addBtn.disabled = false;
+            }
+        }
+
+        // ADD CUSTOM PLATTER TO CART
+        function addCustomPlatterToCart() {
+            let total = 0;
+            let details = [];
+
+            if (builderState.beefSuya > 0) {
+                total += builderState.beefSuya * PRICES.beefSuya;
+                details.push(`${builderState.beefSuya}x Beef Suya`);
+            }
+            if (builderState.wings > 0) {
+                total += builderState.wings * PRICES.wings;
+                details.push(`${builderState.wings}x Wings`);
+            }
+            if (builderState.asun > 0) {
+                total += builderState.asun * PRICES.asun;
+                details.push(`${builderState.asun}x Asun`);
+            }
+
+            if (document.getElementById('side-jollof')?.checked) { total += PRICES.jollof; details.push('Jollof'); }
+            if (document.getElementById('side-plantain')?.checked) { total += PRICES.plantain; details.push('Plantain'); }
+            if (document.getElementById('side-yam')?.checked) { total += PRICES.yam; details.push('Yam Chips'); }
+            if (document.getElementById('side-slaw')?.checked) { total += PRICES.slaw; details.push('Coleslaw'); }
+
+            const customItem = {
+                id: 'custom-' + Date.now(),
+                name: 'Custom Eko Grill Platter',
+                price: total,
+                details: `${details.join(', ')} [Heat: ${builderState.heatLevel}]`,
+                qty: 1
+            };
+
+            cart.push(customItem);
+            updateCartUI();
+            toggleCart();
+        }
+
+        // CART LOGIC
+        function addSingleItem(itemId) {
+            const menuItem = MENU_DATA.find(i => i.id === itemId);
+            if (!menuItem) return;
+
+            const existing = cart.find(c => c.id === itemId);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    id: menuItem.id,
+                    name: menuItem.name,
+                    price: menuItem.price,
+                    details: 'Standard Portion',
+                    qty: 1
+                });
+            }
+            updateCartUI();
+            toggleCart();
+        }
+
+        function updateCartQty(index, delta) {
+            if (!cart[index]) return;
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-count-badge');
+            const container = document.getElementById('cart-items-container');
+            const subtotalEl = document.getElementById('cart-subtotal');
+            const totalEl = document.getElementById('cart-total');
+            const checkoutBtn = document.getElementById('checkout-btn');
+
+            const totalItemsCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            badge.innerText = totalItemsCount;
+
+            let grandTotal = 0;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-16 text-gray-500">
+                        <i class="fa-solid fa-basket-shopping text-4xl mb-3 text-zinc-700"></i>
+                        <p class="text-sm">Your order box is currently empty.</p>
+                        <p class="text-xs text-amber-500 mt-1">Add Beef Suya or custom platters to begin!</p>
+                    </div>
+                `;
+                checkoutBtn.disabled = true;
+            } else {
+                container.innerHTML = cart.map((item, index) => {
+                    const itemTotal = item.price * item.qty;
+                    grandTotal += itemTotal;
+                    return `
+                        <div class="bg-zinc-900/90 p-4 rounded-2xl border border-zinc-800 space-y-2">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h4 class="font-bold text-white text-sm">${item.name}</h4>
+                                    <p class="text-[11px] text-amber-400/90 mt-0.5">${item.details}</p>
+                                </div>
+                                <span class="font-black text-amber-400 text-sm">£${itemTotal.toFixed(2)}</span>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-zinc-800/50">
+                                <span class="text-xs text-gray-400">£${item.price.toFixed(2)} each</span>
+                                <div class="flex items-center bg-zinc-800 rounded-lg p-1 border border-zinc-700">
+                                    <button onclick="updateCartQty(${index}, -1)" class="w-6 h-6 text-gray-300 hover:text-white rounded hover:bg-zinc-700 text-xs font-bold">-</button>
+                                    <span class="w-7 text-center text-xs font-bold text-white">${item.qty}</span>
+                                    <button onclick="updateCartQty(${index}, 1)" class="w-6 h-6 text-gray-300 hover:text-white rounded hover:bg-zinc-700 text-xs font-bold">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+                checkoutBtn.disabled = false;
+            }
+
+            subtotalEl.innerText = `£${grandTotal.toFixed(2)}`;
+            totalEl.innerText = `£${grandTotal.toFixed(2)}`;
+            document.getElementById('checkout-total-amount').innerText = `£${grandTotal.toFixed(2)}`;
+        }
+
+        // MODALS & DRAWER CONTROLS
+        function toggleCart() {
+            const drawer = document.getElementById('cart-drawer');
+            drawer.classList.toggle('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        function openCheckoutModal() {
+            if (cart.length === 0) return;
+            toggleCart();
+            document.getElementById('checkout-modal').classList.remove('hidden');
+        }
+
+        function closeCheckoutModal() {
+            document.getElementById('checkout-modal').classList.add('hidden');
+        }
+
+        function toggleDeliveryAddress(type) {
+            const addressField = document.getElementById('address-field');
+            if (type === 'collection') {
+                addressField.classList.add('hidden');
+            } else {
+                addressField.classList.remove('hidden');
+            }
+        }
+
+        // CHECKOUT SUBMISSION
+        function handleCheckoutSubmit(e) {
+            e.preventDefault();
+            
+            let total = 0;
+            const cartText = cart.map(i => {
+                total += i.price * i.qty;
+                return `• ${i.qty}x ${i.name} (${i.details}) - £${(i.price * i.qty).toFixed(2)}`;
+            }).join('%0A');
+
+            const message = `Hello Eko Grills!%0A%0AI would like to place an order:%0A${cartText}%0A%0ATotal Amount: £${total.toFixed(2)}`;
+            
+            // Redirect to WhatsApp
+            window.open(`https://wa.me/?text=${message}`, '_blank');
+            closeCheckoutModal();
+        }
+    </script>
+</body>
+</html>
